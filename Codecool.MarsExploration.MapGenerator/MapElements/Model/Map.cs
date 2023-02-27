@@ -30,6 +30,24 @@ public record Map(string?[,] Representation, bool SuccessfullyGenerated = false)
         return Representation[coordinate.X, coordinate.Y];
     }
 
+    public int Count(string symbol)
+    {
+        int count = 0;
+        
+        for (int i = 0; i < Dimension; i++)
+        {
+            for (int j = 0; j < Dimension; j++)
+            {
+                if (Representation[i, j] == symbol)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
     public bool IsEmpty(Coordinate coordinate)
     {
         return string.IsNullOrEmpty(Representation[coordinate.X, coordinate.Y])
