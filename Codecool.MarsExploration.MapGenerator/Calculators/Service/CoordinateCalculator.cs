@@ -33,4 +33,78 @@ public class CoordinateCalculator : ICoordinateCalculator
     {
         return coordinates.SelectMany(c => GetAdjacentCoordinates(c, dimension));
     }
+
+    public IEnumerable<Coordinate> ShortestRoute(Map map, Coordinate from, Coordinate where)
+    {
+        var queue = new Queue<Coordinate>();
+        var visited = new HashSet<Coordinate>();
+        var distance = new Dictionary<Coordinate, int>();
+        var previous = new Dictionary<Coordinate, Coordinate>();
+
+        queue.Enqueue(from);
+        visited.Add(from);
+        distance[from] = 0;
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if (current.X == where.X && current.Y == where.Y)
+            {
+                var path = new List<Coordinate>();
+                while (previous.ContainsKey(current))
+                {
+                    path.Insert(0, current);
+                    current = previous[current];
+                }
+                path.Insert(0, current);
+                return path;
+            }
+
+            var neighbors = GetAdjacentCoordinates(current,map.Dimension,1);
+            foreach (var neighbor in neighbors)
+            {
+                if (!visited.Contains(neighbor))
+                {
+                    queue.Enqueue(neighbor);
+                    visited.Add(neighbor);
+                    distance[neighbor] = distance[current] + 1;
+                    previous[neighbor] = current;
+                }
+            }
+        }
+
+        return new List<Coordinate>(){from,where};
+    }
+    
+    // public int ShortestRouteDistance(Map map, Coordinate from, Coordinate where)
+    // {
+    //     var queue = new Queue<Coordinate>();
+    //     var visited = new HashSet<Coordinate>();
+    //     var distance = new Dictionary<Coordinate, int>();
+    //     
+    //     queue.Enqueue(from);
+    //     visited.Add(from);
+    //     
+    //     while (queue.Count > 0)
+    //     {
+    //         var current = queue.Dequeue();
+    //         if (current.X == where.X && current.Y == where.Y)
+    //         {
+    //             return distance[current];
+    //         }
+    //
+    //         var neighbors = GetAdjacentCoordinates(current, map.Dimension, 1).Where(coordinate => map.IsEmpty(coordinate));
+    //         foreach (var neighbor in neighbors)
+    //         {
+    //             if (!visited.Contains(neighbor))
+    //             {
+    //                 queue.Enqueue(neighbor);
+    //                 visited.Add(neighbor);
+    //                 distance[neighbor] = distance[current] + 1;
+    //             }
+    //         }
+    //     }
+    //
+    //     return -1;
+    // }
 }

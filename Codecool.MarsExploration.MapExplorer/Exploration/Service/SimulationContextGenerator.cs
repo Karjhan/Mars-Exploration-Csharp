@@ -20,7 +20,7 @@ public class SimulationContextGenerator : ISimulationContextGenerator
     public SimulationContext Generate(SimulatorConfiguration config)
     {
         Map map = _mapLoader.Load(config.mapFile);
-        MarsRover.Model.MarsRover rover = _roverDeployer.Deploy(map, config.landingSpot, 1);
+        MarsRover.Model.MarsRover rover = _roverDeployer.Deploy(map, config.landingSpot, 1, config.symbols);
         return new SimulationContext(config.stepsTillTimeout, rover, config.landingSpot, map, config.symbols);
     }
 }

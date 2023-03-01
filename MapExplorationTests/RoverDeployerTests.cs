@@ -14,12 +14,12 @@ public class RoverDeployerTests
     private static IMapLoader _mapLoader = new MapLoader();
     private static readonly string WorkDir = AppDomain.CurrentDomain.BaseDirectory;
     private static readonly Map map = _mapLoader.Load($"{WorkDir}\\MapsForTests\\test-0.map");
-    private static readonly MarsRover rover = _roverDeployer.Deploy(map, new Coordinate(7, 27), 5);
+    private static readonly MarsRover rover = _roverDeployer.Deploy(map, new Coordinate(7, 27), 5, new []{"*","^"});
 
     [Test]
     public void Deploy_PlacesRoverOnMap()
     {
-        Assert.AreEqual(rover.ToString(),map.Representation[7,28]);
+        Assert.AreEqual(rover.CurrentPosition,new Coordinate(7,28));
     }
 
     [Test]
@@ -37,6 +37,7 @@ public class RoverDeployerTests
     [Test]
     public void Deploy_StartsWithEmptyResources()
     {
-        Assert.AreEqual(0,rover.FoundResources.Count);
+        string[] resources = new[] { "*", "^" };
+        Assert.AreEqual(2,rover.FoundResources.Count);
     }
 }

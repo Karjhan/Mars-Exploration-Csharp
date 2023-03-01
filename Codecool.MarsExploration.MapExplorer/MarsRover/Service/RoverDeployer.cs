@@ -14,7 +14,7 @@ public class RoverDeployer : IRoverDeployer
     {
         _coordinateCalculator = coordinateCalculator;
     }
-    public Model.MarsRover Deploy(Map map, Coordinate landingSpot, int sight)
+    public Model.MarsRover Deploy(Map map, Coordinate landingSpot, int sight, IEnumerable<string> symbols)
     {
         Random rand = new Random();
         
@@ -22,8 +22,8 @@ public class RoverDeployer : IRoverDeployer
             .Where(coordinate => map.Representation[coordinate.X, coordinate.Y] is null).ToArray();
         Coordinate startingPlace = possibleStartingSpots[rand.Next(possibleStartingSpots.Length)];
         
-        Model.MarsRover result = new Model.MarsRover(id,sight,startingPlace);
-        map.Representation[startingPlace.X, startingPlace.Y] = result.ToString();
+        Model.MarsRover result = new Model.MarsRover(id,sight,startingPlace,symbols);
+        //map.Representation[startingPlace.X, startingPlace.Y] = result.ToString();
 
         id++;
         return result;
