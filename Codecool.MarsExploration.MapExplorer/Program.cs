@@ -44,6 +44,7 @@ class Program
         
         string outputDir = $"{WorkDir}\\LoggedResults";
         ILogger fileLogger = new FileLogger(outputDir);
+        ILogger[] loggers = new[] { consoleLogger, fileLogger };
         
         //Analyzing service
         IAnalyzer HighResourceColonizationAnalyzer = new HighResourceColonizationAnalyzer();
@@ -69,7 +70,7 @@ class Program
         movementEngine.SetRoutine(SmartExploreRoutine);
 
         //simulation engine that generates and logs steps
-        SimulatorEngine simulationEngine = new SimulatorEngine(new[] { consoleLogger, fileLogger });
+        SimulatorEngine simulationEngine = new SimulatorEngine(loggers);
         
         //simulate
         while (context.Outcome is null)
@@ -85,6 +86,11 @@ class Program
                    .Contains(context.Rover.CurrentPosition))
         {
             simulationEngine.RunStep(context, movementEngine, scanner, outcomeAnalyzer);
+        }
+
+        foreach (var logger in loggers)
+        {
+            logger.Log(context.ToString());
         }
     }
 }

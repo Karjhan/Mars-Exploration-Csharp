@@ -18,11 +18,11 @@ public class FileLogger : ILogger
     
     public void Log(string message)
     {
-        if (!File.Exists(outputDir + $"\\Results-{id}.txt"))
+        if (message.Contains("STEP 0"))
         {
-            using (StreamWriter sw = File.CreateText(outputDir + $"\\Results-{id}.txt"));
+            CheckExistanceAndCreateFile();
         }
-        
+
         List<string> linesInFile = File.ReadAllLines(outputDir + $"\\Results-{id}.txt").Skip(3).ToList();
         
         linesInFile.Insert(0, "Mars Exploration Results");
@@ -33,5 +33,16 @@ public class FileLogger : ILogger
         linesInFile.Add("");
         
         File.WriteAllLines(outputDir + $"\\Results-{id}.txt", linesInFile);
+    }
+
+    private void CheckExistanceAndCreateFile()
+    {
+        if (!File.Exists(outputDir + $"\\Results-{id}.txt"))
+        {
+            using (StreamWriter sw = File.CreateText(outputDir + $"\\Results-{id}.txt"));
+            return;
+        }
+        id++;
+        CheckExistanceAndCreateFile();
     }
 }

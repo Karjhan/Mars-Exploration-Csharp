@@ -21,4 +21,12 @@ public record SimulationContext()
         Map = map;
         Symbols = symbols;
     }
+
+    public override string ToString()
+    {
+        return $"Steps Required: {Steps-1};\n" +
+               $"Steps for Timeout: {StepsTillTimeout};\n" +
+               $"Total Resources found: {string.Join(", ",Rover.FoundResources.Select(pair => $"[{pair.Key}: {pair.Value.Count}]"))};\n" +
+               $"Outcome: {Outcome}";
+    }
 };
