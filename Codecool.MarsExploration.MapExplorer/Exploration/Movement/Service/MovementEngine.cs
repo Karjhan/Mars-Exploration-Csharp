@@ -6,11 +6,6 @@ public class MovementEngine : IMovementEngine
 {
     private IMoveRoutine Routine { get; set; }
 
-    public MovementEngine(IMoveRoutine routine)
-    {
-        Routine = routine;
-    }
-    
     public void Move(SimulationContext context)
     {
         Coordinate newPosition = Routine.GetNextMove(context);

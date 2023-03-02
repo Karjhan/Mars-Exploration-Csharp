@@ -23,7 +23,7 @@ public class RoverDeployer : IRoverDeployer
         Coordinate startingPlace = possibleStartingSpots[rand.Next(possibleStartingSpots.Length)];
         
         Model.MarsRover result = new Model.MarsRover(id,sight,startingPlace,symbols);
-        //map.Representation[startingPlace.X, startingPlace.Y] = result.ToString();
+        //map.Representation[landingSpot.X, landingSpot.Y] = "S";
 
         id++;
         return result;

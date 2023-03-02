@@ -15,9 +15,16 @@ public class Scanner : IScanner
     public void Scan(SimulationContext context)
     {
         List<Coordinate> placesToScan = new List<Coordinate>();
-        for (int i = 1; i < context.Rover.Sight; i++)
+        if (context.Rover.Sight == 1)
         {
-            placesToScan.AddRange(_coordinateCalculator.GetAdjacentCoordinates(context.Rover.CurrentPosition,context.Map.Dimension,i));
+            placesToScan.AddRange(_coordinateCalculator.GetAdjacentCoordinates(context.Rover.CurrentPosition,context.Map.Dimension,1));
+        }
+        else
+        {
+            for (int i = 1; i < context.Rover.Sight; i++)
+            {
+                placesToScan.AddRange(_coordinateCalculator.GetAdjacentCoordinates(context.Rover.CurrentPosition,context.Map.Dimension,i));
+            }
         }
 
         foreach (var place in placesToScan)

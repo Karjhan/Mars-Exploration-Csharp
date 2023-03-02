@@ -14,10 +14,12 @@ public class LackOfResourcesAnalyzer : IAnalyzer
         {
             return;
         }
-
-        if (subject.CurrentContext.Rover.FoundResources.Select(pair => pair.Value.Count()).Sum() >
-            (MinimumPercentageToExplore / 100) * subject.CurrentContext.Symbols
-                .Select(symbol => subject.CurrentContext.Map.Count(symbol)).Sum())
+        
+        int alreadyExploredPlacesCount = subject.CurrentContext.Rover.VisitedPlaces.Count();
+        int allEmptyPlacesOnMapCount = subject.CurrentContext.Map.Count(null);
+        double minimumPlacesToExplore = ((double)MinimumPercentageToExplore / (double)100) * allEmptyPlacesOnMapCount;
+        
+        if (alreadyExploredPlacesCount > minimumPlacesToExplore)
         {
             subject.CurrentContext.Outcome = ExplorationOutcome.Error;
         }

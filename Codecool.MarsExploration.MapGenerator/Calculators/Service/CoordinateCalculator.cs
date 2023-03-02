@@ -60,7 +60,7 @@ public class CoordinateCalculator : ICoordinateCalculator
                 return path;
             }
 
-            var neighbors = GetAdjacentCoordinates(current,map.Dimension,1);
+            var neighbors = GetAdjacentCoordinates(current,map.Dimension,1).Where(coordinate => map.IsEmpty(coordinate));
             foreach (var neighbor in neighbors)
             {
                 if (!visited.Contains(neighbor))

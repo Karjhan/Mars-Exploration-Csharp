@@ -2,18 +2,28 @@
 
 public class FileLogger : ILogger
 {
-    private static readonly string WorkDir = AppDomain.CurrentDomain.BaseDirectory;
+    private string outputDir;
     
-    private string outputDir = $"{WorkDir}\\LoggedResults";
-    
-    public void Log(string message)
+    private int id = 1;
+
+    public FileLogger(string resultsFolderPath)
     {
+        outputDir = resultsFolderPath;
+        
         if (!Directory.Exists(outputDir))
         {
             Directory.CreateDirectory(outputDir);
         }
+    }
+    
+    public void Log(string message)
+    {
+        if (!File.Exists(outputDir + $"\\Results-{id}.txt"))
+        {
+            using (StreamWriter sw = File.CreateText(outputDir + $"\\Results-{id}.txt"));
+        }
         
-        List<string> linesInFile = File.ReadAllLines(outputDir + "\\Results.txt").Skip(1).ToList();
+        List<string> linesInFile = File.ReadAllLines(outputDir + $"\\Results-{id}.txt").Skip(3).ToList();
         
         linesInFile.Insert(0, "Mars Exploration Results");
         linesInFile.Insert(1, "\n");
@@ -22,6 +32,6 @@ public class FileLogger : ILogger
         linesInFile.Add(message);
         linesInFile.Add("");
         
-        File.WriteAllLines(outputDir + "\\Results.txt", linesInFile);
+        File.WriteAllLines(outputDir + $"\\Results-{id}.txt", linesInFile);
     }
 }
