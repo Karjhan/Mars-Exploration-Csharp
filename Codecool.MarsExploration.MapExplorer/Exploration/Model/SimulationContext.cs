@@ -1,4 +1,5 @@
-﻿using Codecool.MarsExploration.MapGenerator.Calculators.Model;
+﻿using Codecool.MarsExploration.MapExplorer.ContextResults.Model;
+using Codecool.MarsExploration.MapGenerator.Calculators.Model;
 using Codecool.MarsExploration.MapGenerator.MapElements.Model;
 
 namespace Codecool.MarsExploration.MapExplorer.Exploration;
@@ -29,4 +30,9 @@ public record SimulationContext()
                $"Total Resources found: {string.Join(", ",Rover.FoundResources.Select(pair => $"[{pair.Key}: {pair.Value.Count}]"))};\n" +
                $"Outcome: {Outcome}";
     }
+
+    // public ContextResult ConvertToResult()
+    // {
+    //     return new ContextResult(Steps-1, StepsTillTimeout, Rover.FoundResources.Select(pair => pair.Value.Count).Sum(),Outcome.ToString());
+    // }
 };

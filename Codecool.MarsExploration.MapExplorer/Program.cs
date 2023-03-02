@@ -1,4 +1,5 @@
 ﻿using Codecool.MarsExploration.MapExplorer.Configuration.Model;
+using Codecool.MarsExploration.MapExplorer.ContextResults.Repository;
 using Codecool.MarsExploration.MapExplorer.Exploration;
 using Codecool.MarsExploration.MapExplorer.Exploration.Analysis;
 using Codecool.MarsExploration.MapExplorer.Exploration.Movement;
@@ -19,6 +20,12 @@ class Program
 
     public static void Main(string[] args)
     {
+        //results database path
+        string dbFile = $"{WorkDir}\\Resources\\ContextResults.db";
+        
+        //repository service for results database
+        IContextResultsRepository repository = new ContextResultsRepository(dbFile);
+        
         //generate configuration
         string mapFile = $@"{WorkDir}\Resources\exploration-2.map";
         Coordinate landingSpot = new Coordinate(20, 11);
@@ -92,5 +99,7 @@ class Program
         {
             logger.Log(context.ToString());
         }
+        
+        repository.Add(context.Steps-1, context.StepsTillTimeout, context.Rover.FoundResources.Select(pair => pair.Value.Count).Sum(),context.Outcome.ToString());
     }
 }
