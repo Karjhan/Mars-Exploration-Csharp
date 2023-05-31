@@ -41,12 +41,12 @@ The purpose of the third sprint is to go beyond exploration and prepare the grou
 ### MapGenerator Configuration
 There is no specific UI for configuring the map generator project parameters. You have to manually change them from code
 
-![Screenshot 2023-05-22 223034](https://github.com/CodecoolGlobal/mars-exploration-3-csharp-Karjhan/assets/67586606/88d44d72-1eab-4831-8db0-36e3d1a03652)
+![MapGenConfig](./screenshots/SSMarsExplorationMapGenConfig.png)
 
 ### MapExploration Configuration
 There is no specific UI for configuring the map exploration project parameters. You have to manually change them from code
 
-![Screenshot 2023-05-22 223302](https://github.com/CodecoolGlobal/mars-exploration-3-csharp-Karjhan/assets/67586606/6fa9ff2a-50b8-47fc-864b-ec873403f003)
+![MapExpoConfig](./screenshots/SSMarsExplorationMapExploConfig.png)
 
 ### Build and Run
 Build and run the project from your favourite IDE. This project was done in .NET Core 7 so make sure you at least have this version.
@@ -68,10 +68,16 @@ ls
 ## Visuals
 
 ### Generated Map
-![Screenshot 2023-05-22 224503](https://github.com/CodecoolGlobal/mars-exploration-3-csharp-Karjhan/assets/67586606/0ba72790-e4a6-4fa5-bbde-1a66dbab996b)
+![MapGen](./screenshots/SSMarsExplorationMapGen.png)
 ### Logged results in .txt file
-![Screenshot 2023-05-22 224410](https://github.com/CodecoolGlobal/mars-exploration-3-csharp-Karjhan/assets/67586606/5d812b86-0e67-4551-a863-8da7efc8a182)
+![FileResults](./screenshots/SSMarsExplorationFileResults.png)
 ### Results in database
-![Screenshot 2023-05-22 224836](https://github.com/CodecoolGlobal/mars-exploration-3-csharp-Karjhan/assets/67586606/4bdf2c14-fef2-4387-9f62-3140c97560b0)
+![DBResults](./screenshots/SSMarsExplorationDBResults.png)
 ### Logged results in console:
-![Screenshot 2023-05-22 225009](https://github.com/CodecoolGlobal/mars-exploration-3-csharp-Karjhan/assets/67586606/ec625c94-fcea-4af9-8491-c366982c321b)
+![ConsoleResults](./screenshots/SSMarsExplorationConsoleResults.png)
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Contact
+Feel free to contact me at: karjhan1999@gmail.com
